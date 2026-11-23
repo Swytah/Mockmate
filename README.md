@@ -219,7 +219,30 @@ Used to support:
 
 Both API keys are configured in Lovable project secrets.
 
----
+## 5.1 API Verification - Tested with Postman
+
+I personally verified both AI APIs in Postman before connecting them to MockMate.
+
+**Groq API - Tested Successfully**
+- Endpoint: `https://api.groq.com/openai/v1/chat/completions`
+- Model Used: `openai/gpt-oss-20b`
+- Header: `Authorization: Bearer <GROQ_API_KEY>`
+- Result: `200 OK` - Riya's interview question received successfully
+
+**Gemini API - Tested Successfully**
+- Endpoint: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`
+- Result: `200 OK`
+
+### Errors I Fixed During Testing
+
+| Error | What It Meant | How I Fixed It |
+| --- | --- | --- |
+| 401 | API Key was wrong / Bearer missing | Added `Bearer` before key in Authorization header |
+| 404 | Model does not exist | Changed deprecated model `llama-3.3-70b-versatile` to `openai/gpt-oss-20b` |
+| 503 | Server busy / Model overloaded | Retried request, changed to less busy model |
+
+**Screenshots:**
+Postman test screenshots for Groq 200 OK and Gemini API testing are added in this repository.
 
 ## 6. Product Analytics — Mixpanel
 
